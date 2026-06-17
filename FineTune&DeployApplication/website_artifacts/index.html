@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Generative AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 30px 40px;
+            position: relative;
+            color: white;
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            background: white;
+            padding: 10px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            max-width: 180px;
+            height: auto;
+            display: block;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .form-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: #4facfe;
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            display: block;
+            margin: 0 auto;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .generate-btn:active {
+            transform: translateY(0);
+        }
+
+        .output-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            border: 2px solid #e9ecef;
+        }
+
+        .output-section textarea {
+            background: white;
+            border: 1px solid #dee2e6;
+            min-height: 150px;
+        }
+
+        .disclaimer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 193, 7, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #ffc107;
+            font-style: italic;
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .header {
+                padding: 20px;
+                text-align: center;
+            }
+
+            .logo {
+                position: static;
+                margin: 0 auto 20px;
+                display: inline-block;
+            }
+
+            .main-title {
+                font-size: 2rem;
+                margin-top: 20px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .form-section {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .main-title {
+                font-size: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="cloudage_logo.jpeg" alt="CloudAge Global Services Pvt. Ltd.">
+            </div>
+            <h1 class="main-title">Enterprise Generative AI</h1>
+            <p class="subtitle">Powered by CloudAge Global Services</p>
+        </div>
+
+        <div class="content">
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="content">Prompt</label>
+                    <textarea id="content" rows="6" placeholder="Enter your prompt here..."></textarea>
+                </div>
+
+                <button class="generate-btn" onclick="callApi()">Generate Response</button>
+            </div>
+
+            <div class="output-section">
+                <div class="form-group">
+                    <label for="output">Generated Output</label>
+                    <textarea id="output" rows="8" readonly placeholder="Generated response will appear here..."></textarea>
+                </div>
+            </div>
+
+            <div class="disclaimer">
+                <strong>Note:</strong> As with all AI-powered applications, outputs should be reviewed for accuracy and appropriateness.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function callApi() {
+            var content = document.getElementById('content').value;
+            var apiGatewayUrl = "https://1wzb1u4ot0.execute-api.eu-north-1.amazonaws.com/prod/summarize";
+
+            if (!content.trim()) {
+                alert('Please enter a prompt');
+                return;
+            }
+
+            // Show loading state
+            const button = document.querySelector('.generate-btn');
+            const originalText = button.textContent;
+            button.textContent = 'Generating...';
+            button.disabled = true;
+
+            fetch(apiGatewayUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ inputs: content, parameters: { 'max_new_tokens': 400} })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if(data && data[0] && data[0].generated_text){
+                    document.getElementById('output').value = data[0].generated_text;
+                } else {
+                    throw new Error('Response is not in the expected format');
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('An error occurred: ' + error.message);
+                document.getElementById('output').value = 'Error: ' + error.message;
+            })
+            .finally(() => {
+                // Reset button state
+                button.textContent = originalText;
+                button.disabled = false;
+            });
+        }
+
+        // Add enter key support for textarea
+        document.getElementById('content').addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                callApi();
+            }
+        });
+    </script>
+</body>
+</html>
+
